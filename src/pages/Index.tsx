@@ -5,6 +5,7 @@ import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [activeDemo, setActiveDemo] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -42,7 +43,69 @@ const Index = () => {
           <Button className="hidden md:flex">
             Связаться с нами
           </Button>
+
+          <button
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            <Icon name={mobileMenuOpen ? "X" : "Menu"} size={24} />
+          </button>
         </nav>
+
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-card/95 backdrop-blur-lg border-b border-border animate-fade-in">
+            <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
+              <button
+                onClick={() => {
+                  scrollToSection('home');
+                  setMobileMenuOpen(false);
+                }}
+                className="text-left text-foreground hover:text-primary transition-colors py-2"
+              >
+                Главная
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection('about');
+                  setMobileMenuOpen(false);
+                }}
+                className="text-left text-foreground hover:text-primary transition-colors py-2"
+              >
+                О компании
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection('services');
+                  setMobileMenuOpen(false);
+                }}
+                className="text-left text-foreground hover:text-primary transition-colors py-2"
+              >
+                Услуги
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection('features');
+                  setMobileMenuOpen(false);
+                }}
+                className="text-left text-foreground hover:text-primary transition-colors py-2"
+              >
+                Возможности
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection('contact');
+                  setMobileMenuOpen(false);
+                }}
+                className="text-left text-foreground hover:text-primary transition-colors py-2"
+              >
+                Контакты
+              </button>
+              <Button className="w-full mt-2" onClick={() => setMobileMenuOpen(false)}>
+                Связаться с нами
+              </Button>
+            </div>
+          </div>
+        )}
       </header>
 
       <section id="home" className="pt-32 pb-20 px-6">
